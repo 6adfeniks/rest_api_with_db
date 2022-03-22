@@ -1,18 +1,18 @@
 package models
 
 import (
-"database/sql"
-"fmt"
-"github.com/6adfeniks/rest_api_with_db/internal/config"
-_ "github.com/go-sql-driver/mysql"
-"log"
-"reflect"
-"testing"
+	"database/sql"
+	"fmt"
+	"github.com/6adfeniks/rest_api_with_db/internal/config"
+	_ "github.com/go-sql-driver/mysql"
+	"log"
+	"reflect"
+	"testing"
 )
 
 var db *sql.DB
 
-func start(){
+func start() {
 	cfg, _ := config.NewConfig("../../configs/config2.yml")
 
 	connectionString := fmt.Sprintf("%s:%s@/%s", cfg.Database.User,
@@ -33,7 +33,7 @@ func TestGetUser(t *testing.T) {
 
 	start()
 	clearTable()
-	var send = &User{ID:1, Name: "Kolyan", Age: 21}
+	var send = &User{ID: 1, Name: "Kolyan", Age: 21}
 	send.CreateUser(db)
 
 	var tdb = &User{ID: 1}
@@ -61,15 +61,15 @@ func TestCreateUser(t *testing.T) {
 	var want int
 	db.QueryRow("select last_insert_id()").Scan(&want)
 
-	if tdb.ID != want{
-		t.Errorf("want %v got %v",want, tdb.ID)
+	if tdb.ID != want {
+		t.Errorf("want %v got %v", want, tdb.ID)
 	}
 	tdb.DeleteUser(db)
 
 	var tdb2 = &User{Name: "Anton2etttttttttttttttttttttttttttttttttttttttttttttttttукуаt", Age: 34}
 	err := tdb2.CreateUser(db)
 
-	if  err.Error() != "Error 1406: Data too long for column 'name' at row 1" {
+	if err.Error() != "Error 1406: Data too long for column 'name' at row 1" {
 		t.Errorf("got: %v, want: ", err.Error())
 	}
 
@@ -82,9 +82,9 @@ func TestCreateUser(t *testing.T) {
 
 func TestGetUsers(t *testing.T) {
 	var usersTest = []User{{
-		ID: 1,
+		ID:   1,
 		Name: "Kolyan",
-		Age: 21,
+		Age:  21,
 	},
 		{
 			8,
@@ -120,9 +120,8 @@ func TestGetUsers(t *testing.T) {
 	}
 	db.Close()
 	_, err := GetUsers(db)
-	if err.Error() != "sql: database is closed"{
+	if err.Error() != "sql: database is closed" {
 		t.Errorf("got: %v, want: sql: database is closed", err.Error())
 	}
 
 }
-

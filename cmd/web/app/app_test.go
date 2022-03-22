@@ -81,16 +81,16 @@ func TestInitialize(t *testing.T) {
 	b := App{}
 
 	b.Initialize(cfg.Database.User, cfg.Database.Password, cfg.Database.Dbname)
-	if a.DB == nil || a.Router == nil{
+	if a.DB == nil || a.Router == nil {
 		t.Errorf("Expected router and database controller, got %v and %v", a.Router, a.DB)
 	}
 }
 
-func TestRun(t *testing.T){
+func TestRun(t *testing.T) {
 	b := App{}
 
 	err := b.Run("wow")
-	if err.Error() != "bad address"{
+	if err.Error() != "bad address" {
 		t.Errorf("got: %v, want bad address", err.Error())
 	}
 }
@@ -228,4 +228,3 @@ func TestDeleteUser(t *testing.T) {
 	ensureTableExists()
 
 }
-

@@ -24,12 +24,11 @@ func TestNewConfig(t *testing.T) {
 		}
 	})
 
-	t.Run("wrong yml file", func(t *testing.T){
+	t.Run("wrong yml file", func(t *testing.T) {
 		_, err := NewConfig("../../testdata/fakeconfig.yml")
-		if err.Error() != "yaml: line 8: could not find expected ':'"{
+		if err.Error() != "yaml: line 8: could not find expected ':'" {
 			t.Errorf("The error got: %v, want: yaml: line 8: could not find expected ':'", err.Error())
 		}
 	})
-
 
 }

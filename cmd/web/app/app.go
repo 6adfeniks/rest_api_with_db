@@ -36,9 +36,9 @@ func (a *App) Initialize(user, password, dbname string) {
 }
 
 // Run runs the server with the defined address
-func (a *App) Run(addr string) error{
+func (a *App) Run(addr string) error {
 	err := http.ListenAndServe(addr, a.Router)
-	if err != nil{
+	if err != nil {
 		return errors.New("bad address")
 	}
 	return nil
@@ -67,7 +67,6 @@ func RespondWithJSON(w http.ResponseWriter, code int, payload interface{}) {
 	w.WriteHeader(code)
 	w.Write(response)
 }
-
 
 // getUser returns user if such exists on the server
 func (a *App) getUser(w http.ResponseWriter, r *http.Request) {
@@ -164,4 +163,3 @@ func (a *App) deleteUser(w http.ResponseWriter, r *http.Request) {
 
 	RespondWithJSON(w, http.StatusOK, map[string]string{"result": "success"})
 }
-
